@@ -11,8 +11,8 @@ SYMBOLS = getattr(settings, 'CAPTCHA_SYMBOLS', '123456789ABCDEFGHJKLMNPQRSTVXYZ'
 LENGTH = getattr(settings, 'CAPTCHA_LENGTH', 6)
 
 AVAIL_FONTS = getattr(settings, 'CAPTCHA_FONTS', [
-        ('boneca', join(FONTS_DIR, 'boneca.ttf')),
-        ('acidic', join(FONTS_DIR, 'acidic.ttf')),
+        ('vera', join(FONTS_DIR, 'vera.ttf')),
+        ('chelseamarketsr', join(FONTS_DIR, 'chelseamarketsr.ttf')),
 ])
 
 FOREGROUND_COLORS = getattr(settings, 'CAPTCHA_FOREGROUND_COLORS', (
@@ -35,6 +35,7 @@ ALT = getattr(settings, 'CAPTCHA_ALT', 'no robots here')
 FORMAT = getattr(settings, 'CAPTCHA_FORMAT', ('JPEG', 'image/jpeg'))
 
 CACHE_PREFIX = getattr(settings, 'CAPTCHA_CACHE_PREFIX', 'captcha')
+CACHE_TIMEOUT = getattr(settings, 'CAPTCHA_CACHE_TIMEOUT', 5*60)
 
 DEFAULT_ERROR_MESSAGE = getattr(settings, 'CAPTCHA_DEFAULT_ERROR_MESSAGE', u'The code you entered is wrong.')
 
