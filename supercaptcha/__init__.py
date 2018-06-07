@@ -2,6 +2,7 @@
 
 import os
 from random import choice, random
+from functools import partial
 
 try:
     import Image, ImageDraw, ImageFont, ImageFilter
@@ -71,7 +72,7 @@ def draw(request, code):
     font_name, fontfile = choice(settings.AVAIL_FONTS)
     cache_name = '%s-%s-size' % (PREFIX, font_name)
     text = generate_text()
-    cache.set('%s-%s' % (PREFIX, code), text, 600)
+    cache.set('%s-%s' % (PREFIX, code), text, settings.CACHE_TIMEOUT)
     
     def fits(font_size):
         font = ImageFont.truetype(fontfile, font_size)
@@ -90,7 +91,7 @@ def draw(request, code):
             font_size -= 1
             if fits(font_size):
                 break
-    cache.set(cache_name, font_size, 600)
+    cache.set(cache_name, font_size, settings.CACHE_TIMEOUT)
     
     font = ImageFont.truetype(fontfile, font_size)
     text_size = font.getsize(text)
@@ -121,9 +122,8 @@ def draw(request, code):
         position = [(WIDTH - text_size[0]) / 2,
                     (HEIGHT - text_size[1]) / 2]
         d.text(position, text, font=font, fill=choice(FG_COLORS))
-    
-    response = HttpResponse(mimetype=MIME_TYPE)
-    
+
+    response = HttpResponse(content_type="image/jpeg")
     response['cache-control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate'
     
     for f in settings.FILTER_CHAIN:
@@ -208,7 +208,7 @@ class CaptchaField(forms.MultiValueField):
             raise forms.ValidationError, self.error_messages['required']
 
         cached_text = cache.get('%s-%s' % (PREFIX, code))
-        cache.set('%s-%s' % (PREFIX, code), generate_text(), 600)
+        cache.set('%s-%s' % (PREFIX, code), generate_text(), settings.CACHE_TIMEOUT)
         if not cached_text:
             raise forms.ValidationError, self.error_messages['internal']
 
