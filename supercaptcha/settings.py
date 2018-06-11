@@ -54,3 +54,5 @@ HTML_TEMPLATE_WITH_REFRESH = getattr(settings, 'CAPTCHA_HTML_TEMPLATE_WITH_REFRE
    href="#refresh" class="supercaptcha-refresh">%(refresh_text)s</a>
 <input%(input_attrs)s maxlength="%(length)s" />
 """)
+
+TEST_MODE = getattr(settings, 'CAPTCHA_TEST_MODE', False)

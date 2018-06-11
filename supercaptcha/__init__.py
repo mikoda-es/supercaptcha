@@ -207,6 +207,10 @@ class CaptchaField(forms.MultiValueField):
         if not text:
             raise forms.ValidationError, self.error_messages['required']
 
+        if settings.TEST_MODE and text.lower() == 'passed':
+            # automatically pass the test
+            return True
+
         cached_text = cache.get('%s-%s' % (PREFIX, code))
         cache.set('%s-%s' % (PREFIX, code), generate_text(), settings.CACHE_TIMEOUT)
         if not cached_text:
