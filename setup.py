@@ -4,13 +4,13 @@ from setuptools import setup
 
 setup(
     name='supercaptcha',
-    version='0.1.4',
+    version='0.1.5',
     packages=['supercaptcha'],
     package_data={
         '':['fonts/*.ttf']
     },
     install_requires=[
-        'django',
+        'django<1.9',
         'Pillow==5.1.0'
     ],
     author='Viktor Kotseruba',
