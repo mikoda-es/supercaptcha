@@ -1,0 +1,4 @@
+{% spaceless %}
+<img src="{{ widget.host }}{{ widget.src }}?{{ widget.rnd }}" alt="{{ widget.alt }}" width="{{ widget.width }}" height="{{ widget.height }}" />
+<input{{ widget.input_attrs }} autocomplete="off" maxlength="{{ widget.length }}" />
+{% endspaceless %}

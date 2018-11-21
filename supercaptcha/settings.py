@@ -56,3 +56,4 @@ HTML_TEMPLATE_WITH_REFRESH = getattr(settings, 'CAPTCHA_HTML_TEMPLATE_WITH_REFRE
 """)
 
 TEST_MODE = getattr(settings, 'CAPTCHA_TEST_MODE', False)
+HOST = getattr(settings, 'CAPTCHA_HOST', None)
