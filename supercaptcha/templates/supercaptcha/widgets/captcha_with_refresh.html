@@ -1,7 +1,7 @@
 {% spaceless %}
 <img src="{{ widget.host }}{{ widget.src }}?{{ widget.rnd }}" alt="{{ widget.alt }}" width="{{ widget.width }}" height="{{ widget.height }}" />
 <a href="#refresh" class="refresh-captcha" onclick="var img=this.previousSibling;if(img.nodeType==document.TEXT_NODE){img=img.previousSibling}; img.src=img.src.substring(0,img.src.indexOf('?')+1)+Math.random();return false;">
-    {{ widget.refresh_text|safe }} {{ w}}
+    {{ widget.refresh_text|safe }}
 </a>
 <input{{ widget.input_attrs }} autocomplete="off" maxlength="{{ widget.length }}" />
 {% endspaceless %}
