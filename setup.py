@@ -6,6 +6,10 @@ setup(
     name='supercaptcha',
     version='0.1.6',
     packages=['supercaptcha'],
+    package_data={
+        'fonts': ['fonts/*.ttf'],
+        'templates': ['templates/*']
+    },
     install_requires=[
         'Pillow==5.1.0'
     ],
