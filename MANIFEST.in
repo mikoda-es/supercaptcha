@@ -1,3 +1,3 @@
-include supercaptcha/fonts/acidic.ttf
-include supercaptcha/fonts/boneca.ttf
+include supercaptcha/fonts/vera.ttf
+include supercaptcha/fonts/chelseamarketsr.ttf
 recursive-include supercaptcha/templates *
