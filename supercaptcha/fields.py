@@ -70,14 +70,14 @@ class CaptchaImageWidget(forms.Widget):
 
 class HiddenCodeWidget(forms.HiddenInput):
 
-    def render(self, name, value, attrs=None, renderer=None):
+    def get_context(self, name, value, attrs):
         if value is None:
             empty_current_code()
         if not value:
             value = get_current_code()
         else:
             set_current_code(value)
-        return super(HiddenCodeWidget, self).render(name, value, attrs=attrs, renderer=renderer)
+        return super(HiddenCodeWidget, self).get_context(name, value, attrs)
 
 
 class CaptchaWidget(forms.MultiWidget):
