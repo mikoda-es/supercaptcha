@@ -27,7 +27,7 @@ ERROR_MESSAGE = conf.DEFAULT_ERROR_MESSAGE
 
 def get_current_code():
     if not hasattr(_thread_locals, CODE_ATTR_NAME):
-        code = os.urandom(16).encode('hex')
+        code = os.urandom(16).hex()
         setattr(_thread_locals, CODE_ATTR_NAME, code)
     return getattr(_thread_locals, CODE_ATTR_NAME)
 
@@ -48,7 +48,7 @@ class CaptchaImageWidget(forms.Widget):
         return 'supercaptcha/widgets/captcha_with_refresh.html' if REFRESH else 'supercaptcha/widgets/captcha.html'
 
     def get_context(self, name, value, attrs, *a, **kwargs):
-        context = super(CaptchaImageWidget, self).get_context(name, value, attrs)
+        context = super().get_context(name, value, attrs)
         code = get_current_code()
         empty_current_code()
         src = reverse(draw_view, kwargs={'code': code})
@@ -77,7 +77,7 @@ class HiddenCodeWidget(forms.HiddenInput):
             value = get_current_code()
         else:
             set_current_code(value)
-        return super(HiddenCodeWidget, self).get_context(name, value, attrs)
+        return super().get_context(name, value, attrs)
 
 
 class CaptchaWidget(forms.MultiWidget):
@@ -85,7 +85,7 @@ class CaptchaWidget(forms.MultiWidget):
     def __init__(self, attrs=None, code=None):
         attrs = attrs or {}
         widgets = (HiddenCodeWidget(attrs=attrs), CaptchaImageWidget(attrs=attrs))
-        super(CaptchaWidget, self).__init__(widgets, attrs)
+        super().__init__(widgets, attrs)
 
     def decompress(self, value):
         if value:
@@ -120,16 +120,16 @@ class CaptchaField(forms.MultiValueField):
 
     def clean(self, value):
         if len(value) != 2:
-            raise forms.ValidationError, self.error_messages['wrong']
+            raise forms.ValidationError(self.error_messages['wrong'])
         code, text = value
         if not text:
-            raise forms.ValidationError, self.error_messages['required']
+            raise forms.ValidationError(self.error_messages['required'])
         if conf.TEST_MODE and text.lower() == 'passed':
             # automatically pass the test
             return True
         cached_text = cache.get('%s-%s' % (PREFIX, code))
         cache.set('%s-%s' % (PREFIX, code), generate_text(), conf.CACHE_TIMEOUT)
         if not cached_text:
-            raise forms.ValidationError, self.error_messages['internal']
+            raise forms.ValidationError(self.error_messages['internal'])
         if text.lower() != cached_text.lower():
-            raise forms.ValidationError, self.error_messages['wrong']
+            raise forms.ValidationError(self.error_messages['wrong'])

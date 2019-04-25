@@ -4,11 +4,11 @@ from setuptools import setup
 
 setup(
     name='supercaptcha',
-    version='0.1.6',
+    version='0.1.7',
     packages=['supercaptcha'],
     include_package_data=True,
     install_requires=[
-        'Pillow==5.1.0'
+        'Pillow==6.0.0'
     ],
     author='Viktor Kotseruba',
     author_email='barbuzaster@gmail.com',
