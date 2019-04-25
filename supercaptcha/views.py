@@ -3,7 +3,7 @@ from django.views.decorators.cache import never_cache
 
 
 from .utils import make_image
-import settings
+from supercaptcha import settings
 
 ENC_TYPE, MIME_TYPE = settings.FORMAT
 

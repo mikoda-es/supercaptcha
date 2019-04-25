@@ -4,7 +4,7 @@ from PIL import ImageFont, Image, ImageDraw, ImageFilter
 from django.core.cache import cache
 from django.utils.translation import ugettext_lazy
 
-import settings
+from supercaptcha import settings
 
 
 WIDTH = settings.SIZE[0]
@@ -51,8 +51,8 @@ def make_image(code):
             get_color = lambda: color
         position = [(WIDTH - text_size[0]) / 2, 0]
         shift_max = HEIGHT - text_size[1]
-        shift_min = shift_max / 4
-        shift_max = shift_max * 3 / 4
+        shift_min = shift_max // 4
+        shift_max = shift_max * 3 // 4
         for char in text:
             l_size = font.getsize(char)
             try:

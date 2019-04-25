@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.forms.utils import flatatt
 from django.utils.translation import ugettext_lazy
 
-import settings as conf
+from supercaptcha import settings as conf
 from .utils import generate_text
 from .views import draw_view
 
