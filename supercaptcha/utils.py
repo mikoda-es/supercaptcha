@@ -49,7 +49,7 @@ def make_image(code):
         else:
             color = random.choice(FG_COLORS)
             get_color = lambda: color
-        position = [(WIDTH - text_size[0]) / 2, 0]
+        position = [(WIDTH - text_size[0]) // 2, 0]
         shift_max = HEIGHT - text_size[1]
         shift_min = shift_max // 4
         shift_max = shift_max * 3 // 4
